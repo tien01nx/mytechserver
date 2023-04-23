@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>Login Form</title>
+    <link rel="stylesheet" th:href="@{/client/css/login.css}">
+</head>
+<body>
+<div class="container">
+    <form class="form" id="login">
+        <h1 class="form__title">Login</h1>
+        <div class="form__message form__message--error"></div>
+
+        <div class="form__input-group email_box">
+            <input type="text" class="form__input" id="email_login_err"  autofocus placeholder="Email" onblur="emailValidating()">
+            <span class="form__input-error-message email_message"></span>
+        </div>
+        <div class="form__input-group password_box">
+            <input type="password" class="form__input" id="password_login_err"  autofocus placeholder="Password" onblur="passValidating()">
+            <span class="form__input-error-message password_message"></span>
+        </div>
+        <a onclick="Login()">Login</a>
+        <div class="remember">
+            <p class="left">
+                <input type="checkbox" name="remember-me"> Remember me
+            </p>
+            <p class=" right form__text">
+                <a th:href="@{/quen-mat-khau}" class="form__link">Forgot your password?</a>
+            </p>
+        </div>
+        <p class="form__text">
+            <a class="form__link" th:href="@{/register}" id="linkCreateAccount">Don't have an account? Create account</a>
+        </p>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha512-bnIvzh6FU75ZKxp0GXLH9bewza/OIw6dLVh9ICg0gogclmYGguQJWl8U30WpbsGTqbIiAwxTsbe76DErLq5EDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+        integrity="sha512-TawcSfIUO8yB0Or8FXEDW2X32Q71ZGAOYVVwe7n3EsoyQb+iMZbodI6RnQ4JDcItNoO3TmwP7/bD89vhQA4zTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:src="@{/client/js/login.js}"></script>
+</body>
+</html>
