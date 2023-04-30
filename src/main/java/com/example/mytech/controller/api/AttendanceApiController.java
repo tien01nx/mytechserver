@@ -41,6 +41,7 @@ public class AttendanceApiController {
         }
     }
 
+
     // lấy ra danh sách học sinh đã tạo
     @GetMapping("/attendance/{scheduleId}")
     public ResponseEntity<?> getUserAndAttendanceBySchedule (@PathVariable String scheduleId) {
