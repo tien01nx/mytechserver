@@ -85,4 +85,14 @@ public class RankServiceImpl implements RankService {
     public void deleteRankById(String id) {
         rankRepository.deleteById(id);
     }
+
+    @Override
+    public RankReq getGradesByUserIdAndCourseId(String userId, String courseId) {
+        Rank rank = rankRepository.findByUserIdAndCourseId(userId, courseId);
+        if (rank != null) {
+            RankReq rankReq = new RankReq(rank.getMidtermGrades(), rank.getFinalGrades(), rank.getExams());
+            return rankReq;
+        }
+        return null;
+    }
 }

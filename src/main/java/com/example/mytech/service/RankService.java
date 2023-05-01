@@ -20,4 +20,5 @@ public interface RankService {
     public List<Rank> getRanksByCourseId(String course_id);
 
     public void deleteRankById(String id);
+    RankReq getGradesByUserIdAndCourseId(String userId, String courseId);
 }

@@ -63,6 +63,17 @@ public class RankApiController {
         return ResponseEntity.ok(ranks);
     }
 
+    @GetMapping("/course/{courseId}/users/{userId}/grades")
+    public ResponseEntity<RankReq> getGradesByUserIdAndCourseId(@PathVariable("courseId") String courseId,
+                                                                @PathVariable("userId") String userId) {
+        RankReq rankReq = rankService.getGradesByUserIdAndCourseId(userId, courseId);
+        if (rankReq != null) {
+            return ResponseEntity.ok(rankReq);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
     // xóa điểm của học viên
     @DeleteMapping("/rank/delete/{id}")

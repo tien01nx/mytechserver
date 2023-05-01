@@ -17,4 +17,8 @@ public interface RankRepository extends JpaRepository<Rank, String> {
     public Rank findByCourseIdAndUserId (String course_id, String user_id);
 
     public List<Rank> findByCourseId (String courseId) ;
+
+    // In RankRepository.java
+    Rank findByUserIdAndCourseId(String userId, String courseId);
+
 }
