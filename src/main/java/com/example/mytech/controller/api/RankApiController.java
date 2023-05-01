@@ -47,11 +47,11 @@ public class RankApiController {
     }
 
     //cập nhật điểm cho sinh viên
+    @PutMapping("/{course_id}/{user_id}/grades")
+    public ResponseEntity<?> updateRank(@PathVariable String course_id, @PathVariable String user_id, @RequestBody RankReq req) {
 
-    @PutMapping("/{id}/{user_id}/grades")
-    public ResponseEntity<?> updateRank(@PathVariable String id, @PathVariable String user_id, @RequestBody RankReq req) {
         // Gọi phương thức updateRank của lớp RankService và trả về kết quả
-        Rank updatedRank = rankService.updateRank(id, user_id, req);
+        Rank updatedRank = rankService.updateRank(course_id, user_id, req);
         return ResponseEntity.ok(updatedRank);
     }
 

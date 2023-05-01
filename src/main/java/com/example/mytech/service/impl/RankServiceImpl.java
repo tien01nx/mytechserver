@@ -50,9 +50,9 @@ public class RankServiceImpl implements RankService {
     }
 
     @Override
-    public Rank updateRank(String id, String user_id, RankReq req) {
+    public Rank updateRank(String course_id, String user_id, RankReq req) {
 
-        Rank existingRank = rankRepository.findByIdAndUserId(id, user_id);
+        Rank existingRank = rankRepository.findByCourseIdAndUserId(course_id, user_id);
         if (existingRank == null) {
             throw new NotFoundException("Rank not found");
         }
