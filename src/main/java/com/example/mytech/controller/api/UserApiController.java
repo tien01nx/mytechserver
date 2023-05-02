@@ -3,6 +3,7 @@ package com.example.mytech.controller.api;
 
 import com.example.mytech.entity.Course;
 import com.example.mytech.entity.User;
+import com.example.mytech.model.dto.UserCourseDTO;
 import com.example.mytech.model.request.ChangePassWordRep;
 import com.example.mytech.model.request.UpdateProfileReq;
 import com.example.mytech.model.request.UserRep;
@@ -120,6 +121,7 @@ public class UserApiController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return ResponseEntity.ok("Cập nhật profile thành công");
     }
+
 
     // get list course of user isLogined
     @GetMapping("/course/users/{userId}")

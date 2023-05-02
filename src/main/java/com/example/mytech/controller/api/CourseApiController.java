@@ -4,6 +4,7 @@ import com.example.mytech.entity.Course;
 import com.example.mytech.entity.Schedule;
 import com.example.mytech.entity.User;
 import com.example.mytech.model.dto.CourseDTO;
+import com.example.mytech.model.dto.UserCourseDTO;
 import com.example.mytech.model.request.CourseRep;
 import com.example.mytech.repository.UserRepository;
 import com.example.mytech.service.CourseService;
@@ -85,6 +86,10 @@ public class CourseApiController {
          return ResponseEntity.ok(course);
     }
 
+
+
+
+
     // Lấy danh sách khóa học có giảng viên , lịch học của khóa học đó
     @GetMapping("courses/users/schedules")
     public List<CourseDTO> getCoursesWithTeacherAndSchedule() {
@@ -117,7 +122,11 @@ public class CourseApiController {
             courseDTO.setStatus(course.getStatus());
             courseDTO.setNumberOfSessions(course.getNumberOfSessions());
             courseDTO.setTeacheNames(teacherNames);
+
             courseDTO.setScheduleList(schedules);
+
+
+
 
             courseDTOs.add(courseDTO);
         }

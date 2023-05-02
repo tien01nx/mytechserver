@@ -328,7 +328,7 @@
                                                     <span th:text="${#dates.format(schedule.day, 'dd-MM-yyyy')}"></span>
                                                 </td>
                                                 <td class="schedule-duration" th:data-id="${schedule.id}"
-                                                    th:text="${schedule.duration}">
+                                                    th:text="${schedule.ca}">
                                                 </td>
                                                 <td class="schedule-status" th:data-id="${schedule.id}">
                                                     <span id="schedule-status" th:text="${schedule.status == 1} ? 'Đi học' : 'Nghỉ học'"></span>

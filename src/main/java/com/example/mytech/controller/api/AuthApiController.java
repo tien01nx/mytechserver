@@ -71,7 +71,7 @@ public class AuthApiController {
                 userDetails.getUser().getId(),
                 userDetails.getUser().getName(),
                 userDetails.getUser().getEmail(),
-                roles); // Thêm vào đây
+                roles,userDetails.getUser().getImage()); // Thêm vào đây
 
         return ResponseEntity.ok(jwtResponse);
 

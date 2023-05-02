@@ -90,7 +90,7 @@ public class RankServiceImpl implements RankService {
     public RankReq getGradesByUserIdAndCourseId(String userId, String courseId) {
         Rank rank = rankRepository.findByUserIdAndCourseId(userId, courseId);
         if (rank != null) {
-            RankReq rankReq = new RankReq(rank.getMidtermGrades(), rank.getFinalGrades(), rank.getExams());
+            RankReq rankReq = new RankReq(rank.getMidtermGrades(), rank.getFinalGrades(), rank.getExams(),rank.getAvg(),rank.getRanking());
             return rankReq;
         }
         return null;

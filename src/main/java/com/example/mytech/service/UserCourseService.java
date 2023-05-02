@@ -19,6 +19,10 @@ public interface UserCourseService {
     // find by id
     public UserCourse getUserCourseById (String id) ;
 
+    public List<UserCourseDTO> getUserCoursesByStatus(int status, String userId);
+
+
+
     // update token
     void updateTokenNotification(String userId, String tokenNotification);
 

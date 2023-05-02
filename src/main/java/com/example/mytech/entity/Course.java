@@ -82,6 +82,8 @@ public class Course {
     @JsonIgnore
     private List<Schedule> schedules;
 
+
+
     @PreRemove
     public void remove() {
         for (User user : users) {

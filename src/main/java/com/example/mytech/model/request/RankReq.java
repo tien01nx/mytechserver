@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -17,4 +19,14 @@ public class RankReq {
     private float finalGrades;
 
     private float exams;
+    private  float avg;
+    private String ranking;
+
+
+   /* private  String name;
+    private  String gender;
+    private Date dateOfBirth;
+    private String image;*/
+
+
 }

@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,6 +50,23 @@ public class UserCourseServiceImpl implements UserCourseService {
             throw new NotFoundException("UserCourse do not exits");
         }
         return rs.get();
+    }
+
+    @Override
+    public List<UserCourseDTO> getUserCoursesByStatus(int status, String userId) {
+        List<UserCourse> userCourses = userCourseRepository.findByStatusAndUserId(status, userId);
+        List<UserCourseDTO> userCourseDTOS = new ArrayList<>();
+        for (UserCourse userCourse : userCourses) {
+            UserCourseDTO userCourseDTO = new UserCourseDTO();
+            userCourseDTO.setCourseId(userCourse.getCourse().getId());
+            userCourseDTO.setEnrollDate(userCourse.getEnrollDate());
+            userCourseDTO.setStatus(userCourse.getStatus());
+            userCourseDTO.setName(userCourse.getUser().getName());
+            userCourseDTO.setImage(userCourse.getUser().getImage());
+            userCourseDTO.setAddress(userCourse.getUser().getAddress());
+            userCourseDTOS.add(userCourseDTO);
+        }
+        return userCourseDTOS;
     }
 
     // cập nhật token vào UserCourse

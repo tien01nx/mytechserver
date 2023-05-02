@@ -55,6 +55,9 @@ public class RankApiController {
         return ResponseEntity.ok(updatedRank);
     }
 
+
+
+
     // lấy danh sách điểm của học viên
     @GetMapping("/rank/{course_id}")
     public ResponseEntity<List<Rank>> getRanksByCourseId(@PathVariable String course_id) {
@@ -63,6 +66,10 @@ public class RankApiController {
         return ResponseEntity.ok(ranks);
     }
 
+
+
+
+    // lấy điểm của từng học vien
     @GetMapping("/course/{courseId}/users/{userId}/grades")
     public ResponseEntity<RankReq> getGradesByUserIdAndCourseId(@PathVariable("courseId") String courseId,
                                                                 @PathVariable("userId") String userId) {

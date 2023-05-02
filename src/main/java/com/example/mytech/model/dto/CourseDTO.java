@@ -1,5 +1,6 @@
 package com.example.mytech.model.dto;
 
+import com.example.mytech.entity.CA;
 import com.example.mytech.entity.Schedule;
 import com.example.mytech.entity.User;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +36,7 @@ public class CourseDTO {
     private List<String> teacheNames;
 
     private List<Schedule> scheduleList ;
+
 
     public List<String> getTeacheNames(List<String> teacherNames) {
         return teacheNames;

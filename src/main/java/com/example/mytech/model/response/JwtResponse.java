@@ -19,14 +19,16 @@ public class JwtResponse {
     private String name;
     private String email;
     private List<String> roles;
+    private String image;
 
-    public JwtResponse(String token, String id, String name, String email, List<String> roles) {
+    public JwtResponse(String token, String id, String name, String email, List<String> roles, String image) {
         this.token = token;
         this.type = type;
         this.id = id;
         this.name = name;
         this.email = email;
         this.roles = roles;
+        this.image =image;
     }
 
     public JwtResponse(String token, String id, String name, String email, List<String> roles, List<UserCourse> userCourses) {
