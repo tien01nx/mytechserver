@@ -1,7 +1,9 @@
 package com.example.mytech.entity;
 
 
+import com.example.mytech.model.response.UserRankResponse;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,4 +48,17 @@ public class Rank {
     @JoinColumn(name = "course_id", nullable = false)
     @JsonBackReference
     private Course course;
+
+
+    @Transient
+    private UserRankResponse userResponse;
+
+    @JsonGetter("user")
+    public UserRankResponse getUserResponse() {
+        if (user != null) {
+            return new UserRankResponse(user);
+        }
+        return null;
+    }
+
 }

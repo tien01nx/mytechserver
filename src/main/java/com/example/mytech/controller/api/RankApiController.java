@@ -5,6 +5,8 @@ import com.example.mytech.entity.Course;
 import com.example.mytech.entity.Rank;
 import com.example.mytech.entity.User;
 import com.example.mytech.model.request.RankReq;
+import com.example.mytech.model.response.RankResponse;
+import com.example.mytech.model.response.UserRankResponse;
 import com.example.mytech.service.CourseService;
 import com.example.mytech.service.RankService;
 import com.example.mytech.service.UserService;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class RankApiController {
@@ -58,13 +61,26 @@ public class RankApiController {
 
 
 
-    // lấy danh sách điểm của học viên
+ /*   // lấy danh sách điểm của học viên
     @GetMapping("/rank/{course_id}")
     public ResponseEntity<List<Rank>> getRanksByCourseId(@PathVariable String course_id) {
         // Gọi phương thức getRanksByCourseId của lớp RankService và trả về kết quả
         List<Rank> ranks = rankService.getRanksByCourseId(course_id);
         return ResponseEntity.ok(ranks);
+    }*/
+
+    @GetMapping("/rank/{course_id}")
+    public ResponseEntity<List<RankResponse>> getRanksByCourseId(@PathVariable String course_id) {
+        List<Rank> ranks = rankService.getRanksByCourseId(course_id);
+        if (ranks == null || ranks.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        List<RankResponse> userRankResponses = ranks.stream()
+                .map(rank -> new RankResponse(new UserRankResponse(rank.getUser()), rank))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(userRankResponses);
     }
+
 
 
 
