@@ -27,7 +27,7 @@ public interface AttendanceRepository extends JpaRepository<Attendance , String>
 
 
     Attendance findByUserAndSchedule(User student, Schedule schedule);
-    @Query("SELECT NEW com.example.mytech.model.dto.AttendanceScheduleDTO(s.day, s.dayOfWeek, s.ca,s.status, a.attendance) "
+    @Query("SELECT NEW com.example.mytech.model.dto.AttendanceScheduleDTO(s.day, s.dayOfWeek, s.ca,s.status, a.attendance,s.number) "
             + "FROM Attendance a "
             + "JOIN a.schedule s "
             + "JOIN s.course c "

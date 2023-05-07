@@ -28,6 +28,9 @@ public class ScheduleReq {
     private CA duration;
 
     private Integer status ;
+    private Integer number ;
 
     private String course_id;
+
+
 }

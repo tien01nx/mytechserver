@@ -345,6 +345,9 @@
                                         <input type="date" class="form-control" id="day" name="day">
                                     </div>
                                     <div class="form-group">
+                                        <input type="hidden" class="form-control" id="number" name="number">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="dayOfWeek">Thứ</label>
                                         <select class="form-control" id="dayOfWeek" name="dayOfWeek">
                                             <option value="MONDAY">Thứ 2</option>
@@ -434,8 +437,9 @@
         let day = $('#day').val();
         let duration = $('#duration').val();
         let status = $('#status').val() ;
+        let number = $('#number').val() ;
 
-        if (course_id.length === 0 || dayOfWeek.length === 0 || duration.length === 0 || status.length === "") {
+        if (course_id.length === 0 || dayOfWeek.length === 0 || duration.length === 0 || status.length === "" || number.length === "") {
             toastr.warning("Vui lòng điền đầy đủ thông tin");
             return;
         }
@@ -445,7 +449,8 @@
             dayOfWeek: dayOfWeek,
             day: day,
             duration: duration,
-            status: status
+            status: status,
+            number: number
         };
 
         $.ajax({

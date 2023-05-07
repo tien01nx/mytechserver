@@ -50,6 +50,11 @@ public class Schedule {
     @JsonIgnore
     private List<Attendance> attendanceList = new ArrayList<>();
 
+
+    @Column(name = "numberOfSession")
+    private int number ;
+
+
     public void addAttendance(Attendance attendance) {
         attendanceList.add(attendance);
         attendance.setSchedule(this);

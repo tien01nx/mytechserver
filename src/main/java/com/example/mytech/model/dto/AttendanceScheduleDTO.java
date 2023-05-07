@@ -19,5 +19,6 @@ public class AttendanceScheduleDTO {
     private CA ca;
     private int status;
     private boolean attendance ;
+    private  int number;
 
 }

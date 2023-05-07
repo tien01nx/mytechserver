@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,9 +89,6 @@ public class CourseApiController {
     }
 
 
-
-
-
     // Lấy danh sách khóa học có giảng viên , lịch học của khóa học đó
     @GetMapping("courses/users/schedules")
     public List<CourseDTO> getCoursesWithTeacherAndSchedule() {
@@ -107,6 +106,12 @@ public class CourseApiController {
                 teacherNames.add(user.getName());
             }
             List<Schedule> schedules = course.getSchedules();
+            Collections.sort(schedules, new Comparator<Schedule>() {
+                @Override
+                public int compare(Schedule s1, Schedule s2) {
+                    return s1.getDay().compareTo(s2.getDay());
+                }
+            });
 
             // Tạo đối tượng CourseDTO chứa thông tin cần thiết
             CourseDTO courseDTO = new CourseDTO();

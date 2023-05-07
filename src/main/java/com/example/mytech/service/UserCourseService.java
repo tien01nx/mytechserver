@@ -21,6 +21,7 @@ public interface UserCourseService {
 
     public List<UserCourseDTO> getUserCoursesByStatus(int status, String userId);
 
+    public List<String> getTeacherNames(String courseId);
 
 
     // update token

@@ -60,7 +60,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public Schedule createSchedule(ScheduleReq req) throws ParseException {
 
         // Kiểm tra mã khóa học
-        if (req.getCourse_id().isEmpty()){
+        if (req.getCourse_id().isEmpty()) {
             throw new NotFoundException("Không tìm thấy khóa học ");
         }
 
@@ -75,8 +75,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
         Date reqDate = formatter.parse(String.valueOf(req.getDay()));
 
-        Date courseStartDate = formatter.parse(String.valueOf(course.getStartDate())) ;
-
+        Date courseStartDate = formatter.parse(String.valueOf(course.getStartDate()));
 
         if (reqDate.before(courseStartDate)) {
             throw new IllegalArgumentException("Ngày học không nằm trong thời gian bắt đầu của khóa học. "
@@ -86,6 +85,29 @@ public class ScheduleServiceImpl implements ScheduleService {
         schedule.setDayOfWeek(req.getDayOfWeek());
         schedule.setCa(req.getDuration());
 
+        // Lấy số buổi học đã có sẵn
+        List<Schedule> existingSchedules = scheduleRepository.findByCourse(course);
+        int numberOfExistingSchedules = existingSchedules.size();
+
+        // Tự động thêm số buổi học
+        if (req.getNumber() == null) {
+            // Kiểm tra xem buổi học đã tồn tại trong danh sách lịch học của khóa học hay chưa
+            boolean isExistingSchedule = false;
+            for (Schedule existingSchedule : existingSchedules) {
+                if (existingSchedule.getNumber() == numberOfExistingSchedules + 1) {
+                    isExistingSchedule = true;
+                    break;
+                }
+            }
+            if (isExistingSchedule) {
+                schedule.setNumber(numberOfExistingSchedules + 2);
+            } else {
+                schedule.setNumber(numberOfExistingSchedules + 1);
+            }
+        } else {
+            schedule.setNumber(req.getNumber());
+        }
+
         if (req.getStatus() == null) {
             schedule.setStatus(1);
         } else {
@@ -93,11 +115,10 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
 
         // Kiểm tra lịch học đã tồn tại chưa
-        List<Schedule> existingSchedules = scheduleRepository.findByDayOrCourse(reqDate , course);
         for (Schedule existingSchedule : existingSchedules) {
             String existingDayString = formatter.format(existingSchedule.getDay());
             Date existingDate = formatter.parse(existingDayString);
-            if (existingDate.equals(reqDate) && existingSchedule.getCourse().getName().equals(schedule.getCourse().getName())) {
+            if (existingDate.equals(reqDate) && existingSchedule.getNumber() == schedule.getNumber()) {
                 throw new IllegalArgumentException("Lịch học đã tồn tại.");
             }
         }
@@ -108,6 +129,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         }
         return schedule;
     }
+
     @Autowired
     private NotificationService notificationService;
 

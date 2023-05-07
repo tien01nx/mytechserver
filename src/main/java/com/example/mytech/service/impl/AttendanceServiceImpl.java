@@ -64,6 +64,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public List<AttendanceDTO> getUserAndAttendanceByScheduleId(String scheduleId) {
+
         return attendanceRepository.getUserAndAttendanceByScheduleId(scheduleId);
     }
 

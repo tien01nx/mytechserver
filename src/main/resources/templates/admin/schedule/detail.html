@@ -290,6 +290,9 @@
                                                 Ngày học
                                             </th>
                                             <th width="15%">
+                                                Buổi
+                                            </th>
+                                            <th width="15%">
                                                 Ca học
                                             </th>
                                             <th width="15%">
@@ -326,6 +329,9 @@
                                                 </td>
                                                 <td class="schedule-day" th:data-id="${schedule.id}" >
                                                     <span th:text="${#dates.format(schedule.day, 'dd-MM-yyyy')}"></span>
+                                                </td>
+                                                <td class="schedule-number" th:data-id="${schedule.id}"
+                                                    th:text="${schedule.number}">
                                                 </td>
                                                 <td class="schedule-duration" th:data-id="${schedule.id}"
                                                     th:text="${schedule.ca}">
@@ -376,6 +382,10 @@
                                     <div class="form-group">
                                         <label for="update-day">Ngày Học</label>
                                         <input type="date" class="form-control" id="update-day" name="update-day" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="update-day">Buổi</label>
+                                        <input type="text" class="form-control" id="update-number" name="update-number" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="update-dayOfWeek">Thứ</label>
@@ -527,7 +537,7 @@
 
         let dayOfWeek = $('.schedule-dayOfWeek[data-id=' + id + ']').text();
         let duration = $('.schedule-duration[data-id=' + id + ']').text();
-
+        let number = $('.schedule-number[data-id=' + id + ']').text();
         var scheduleStatus = $('#schedule-status').text();
         if (scheduleStatus === 'Đi học') {
             $('#update-status').val('1');
@@ -539,6 +549,7 @@
         $('#update-day').val(day ? day : '');
         $('#update-dayOfWeek').val(dayOfWeek);
         $('#update-duration').val(duration);
+        $('#update-number').val(number);
         $('#update-schedule-id').val(id);
         $('#updateScheduleModal').modal('show');
 
@@ -562,7 +573,8 @@
                 day: day,
                 dayOfWeek: dayOfWeek,
                 duration: duration,
-                status: status
+                status: status,
+                number: number
             };
 
             // Gọi API để cập nhật dữ liệu
@@ -600,6 +612,7 @@
                     $('.schedule-dayOfWeek[data-id=' + id + ']').parent().remove();
                     $('.schedule-day[data-id=' + id + ']').parent().remove();
                     $('.category-duration[data-id=' + id + ']').parent().remove();
+                    $('.schedule-number[data-id=' + id + ']').parent().remove();
                     $('.category-status[data-id=' + id + ']').parent().remove();
                     $('#deleteScheduleModal').modal('hide');
                     $('#delete-schedule-id').val('');
