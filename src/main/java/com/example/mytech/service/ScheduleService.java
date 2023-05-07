@@ -25,6 +25,7 @@ public interface ScheduleService {
 
     public Schedule getScheduleById (String id) ;
 
+
     public List<Schedule> getCourseSchedules (String courseId ) ;
 
 

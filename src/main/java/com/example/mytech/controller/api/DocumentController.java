@@ -31,15 +31,17 @@ public class DocumentController {
         return ResponseEntity.ok(documentService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Document> getDocumentById(@PathVariable String id) {
-        Document document = documentService.findById(id);
+    // lấy dữ liệu theo ngày học nhưng đang truyền nhầm id chưa fix đang lấy theo id Document chứ k phải idSchedule
+    @GetMapping("/schedule/{scheduleId}")
+    public ResponseEntity<Document> getDocumentByScheduleId(@PathVariable String scheduleId) {
+        Document document = documentService.findByScheduleId(scheduleId);
         if (document == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(document);
     }
 
+    // tạo tài liệu cho buổi học
     @PostMapping("/upload/{scheduleId}")
     public ResponseEntity<Document> uploadFile(@RequestParam("file") MultipartFile file,
                                                @PathVariable("scheduleId") String scheduleId,

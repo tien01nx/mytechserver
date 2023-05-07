@@ -10,4 +10,6 @@ public interface DocumentService {
     Document findById(String id);
     Document save(Document document);
     void deleteById(String id);
+
+    Document findByScheduleId(String scheduleId);
 }

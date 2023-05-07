@@ -32,4 +32,9 @@ public class DocumentServiceImpl implements DocumentService {
     public void deleteById(String id) {
         documentRepository.deleteById(id);
     }
+
+    @Override
+    public Document findByScheduleId(String scheduleId) {
+        return documentRepository.findBySchedule_Id(scheduleId);
+    }
 }
