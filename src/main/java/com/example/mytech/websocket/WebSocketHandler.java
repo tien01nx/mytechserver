@@ -15,7 +15,9 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 @Component
@@ -27,15 +29,17 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Autowired
     private UserCourseService userCourseService;
+    public static List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
 
 
-
-    public static List<WebSocketSession> sessions = new ArrayList<>();
+//    public static List<WebSocketSession> sessions = new ArrayList<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         sessions.add(session);
+        log.info("New WebSocket connection established. Current session count: " + sessions.size());
     }
+
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {

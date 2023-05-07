@@ -2,6 +2,7 @@ package com.example.mytech.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,6 +54,22 @@ public class Schedule {
 
     @Column(name = "numberOfSession")
     private int number ;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Document> documents = new ArrayList<>();
+    // Các getter và setter tương ứng
+
+    // Thêm phương thức để quản lý danh sách tài liệu
+    public void addDocument(Document document) {
+        documents.add(document);
+        document.setSchedule(this);
+    }
+
+    public void removeDocument(Document document) {
+        documents.remove(document);
+        document.setSchedule(null);
+    }
 
 
     public void addAttendance(Attendance attendance) {

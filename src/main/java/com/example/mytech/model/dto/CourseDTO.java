@@ -3,10 +3,7 @@ package com.example.mytech.model.dto;
 import com.example.mytech.entity.CA;
 import com.example.mytech.entity.Schedule;
 import com.example.mytech.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
@@ -18,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
+@ToString
 public class CourseDTO {
     private String id ;
     private String name ;
